@@ -2,7 +2,7 @@ import {Webhook} from "svix";
 import User from "../models/User.js";
 import Stripe from "stripe"
 import Course from"../models/Course.js"
-import {Purchase} from "../models/Purchase.js"
+import Purchase from "../models/Purchase.js"
 //API Controller Function to Manage Clerk User with database
 export const clerkWebhooks=async(req,res)=>
 {
@@ -80,10 +80,10 @@ const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY)
           const {purchaseId}=session.data[0].metadata;
           const purchaseData =await Purchase.findById(purchaseId)
           const userData = await User.findById(purchaseData.userId)
-           const courseDat=await Course.findById(purchaseData.courseId.toString())
+           const courseData=await Course.findById(purchaseData.courseId.toString())
            courseData.enrolledStudents.push(userData)
            await courseData.save()
-           userData.enrolledCourses.push(courseDat._id)
+           userData.enrolledCourses.push(courseData._id)
            await userData.save()
            purchaseData.status ='completed'
            await purchaseData.save()
