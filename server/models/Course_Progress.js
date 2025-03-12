@@ -18,4 +18,4 @@ const courseProgressSchema =new mongoose.Schema(
         lectureCompleted:[]
     },{minimize:false}
 );
-export const CourseProgress =mongoose.model('CourseProgress',courseProgressSchema)
+export const CourseProgress =mongoose.model('Course_Progress',courseProgressSchema)
